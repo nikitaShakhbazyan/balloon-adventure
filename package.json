@@ -1,0 +1,29 @@
+{
+  "name": "balloon-adventure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "game.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikitaShakhbazyan/balloon-adventure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikitaShakhbazyan/balloon-adventure/issues"
+  },
+  "homepage": "https://github.com/nikitaShakhbazyan/balloon-adventure#readme",
+  "dependencies": {
+    "pixi.js": "^8.14.3"
+  },
+  "devDependencies": {
+    "vite": "^7.2.4"
+  }
+}
