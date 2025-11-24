@@ -4,9 +4,9 @@ A simple hot air balloon game built with PixiJS. Try to fly as high as you can a
 
 ## Technologies
 
-PixiJS v8 - 2D rendering engine
-Vite - development server and build tool
-JavaScript ES6+ modules
+- PixiJS v8 - 2D rendering engine
+- Vite - development server and build tool
+- JavaScript ES6+ modules
 
 ## How to run
 
