@@ -1,6 +1,6 @@
 # Balloon Adventure
 
-A simple hot air balloon game built with PixiJS. Try to fly as high as you can and land safely before the balloon pops
+A simple hot air balloon game built with PixiJS. Try to fly as high as you can and land safely before the balloon pops 🎉
 
 ## Technologies
 
