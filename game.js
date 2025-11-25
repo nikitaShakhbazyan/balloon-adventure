@@ -7,9 +7,28 @@ await app.init({
     width: 1000,
     height: 800,
     backgroundColor: 0x87CEEB,
+    autoDensity: true,
+    resolution: window.devicePixelRatio || 1,
 });
 
 document.getElementById('game-container').appendChild(app.canvas);
+
+function resize() {
+    const ratio = Math.min(
+        window.innerWidth / 1000,
+        window.innerHeight / 800
+    );
+
+    const newWidth = Math.floor(1000 * ratio);
+    const newHeight = Math.floor(800 * ratio);
+
+    app.renderer.resize(newWidth, newHeight);
+    app.stage.scale.set(ratio);
+}
+
+window.addEventListener('resize', resize);
+window.addEventListener('orientationchange', resize);
+resize();
 
 sound.add('wind', {
     url: '/sounds/mixkit-air-sound.wav',
