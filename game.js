@@ -130,6 +130,55 @@ scoreText.x = 20;
 scoreText.y = 20;
 app.stage.addChild(scoreText);
 
+let isMuted = false;
+
+const muteButton = new Graphics();
+muteButton.rect(0, 0, 100, 40);
+muteButton.fill(0x333333);
+muteButton.x = 880;
+muteButton.y = 20;
+muteButton.eventMode = 'static';
+muteButton.cursor = 'pointer';
+app.stage.addChild(muteButton);
+
+const muteText = new Text({
+    text: '🔊 Sound',
+    style: {
+        fontFamily: 'Arial',
+        fontSize: 18,
+        fill: 0xFFFFFF,
+        fontWeight: 'bold',
+    }
+});
+muteText.x = 895;
+muteText.y = 30;
+app.stage.addChild(muteText);
+
+muteButton.on('pointerdown', () => {
+    isMuted = !isMuted;
+    sound.toggleMuteAll();
+
+    if (isMuted) {
+        muteText.text = '🔇 Muted';
+        muteButton.clear();
+        muteButton.rect(0, 0, 100, 40);
+        muteButton.fill(0xFF4444);
+    } else {
+        muteText.text = '🔊 Sound';
+        muteButton.clear();
+        muteButton.rect(0, 0, 100, 40);
+        muteButton.fill(0x333333);
+    }
+});
+
+muteButton.on('pointerover', () => {
+    muteButton.tint = 0xCCCCCC;
+});
+
+muteButton.on('pointerout', () => {
+    muteButton.tint = 0xFFFFFF;
+});
+
 const landButtonBg = new Graphics();
 landButtonBg.roundRect(0, 0, 150, 50, 10);
 landButtonBg.fill(0x4CAF50);
