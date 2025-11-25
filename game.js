@@ -1,4 +1,5 @@
 import { Application, Graphics, Text } from 'pixi.js';
+import { sound } from '@pixi/sound';
 
 const app = new Application();
 
@@ -9,6 +10,54 @@ await app.init({
 });
 
 document.getElementById('game-container').appendChild(app.canvas);
+
+sound.add('wind', {
+    url: '/sounds/mixkit-air-sound.wav',
+    volume: 0.3,
+    loop: true,
+    autoPlay: true,
+    preload: true,
+});
+
+sound.add('pop', {
+    url: 'https://assets.mixkit.co/active_storage/sfx/2073/2073-preview.mp3',
+    volume: 1,
+    sprites: {
+        short: {
+            start: 0,
+            end: 0.5,
+        }
+    }
+});
+
+sound.volumeAll = 1;
+
+let soundStarted = false;
+
+const tryStartSound = async () => {
+    if (soundStarted) return;
+
+    try {
+        const context = sound.context;
+        if (context.state === 'suspended') {
+            await context.resume();
+        }
+        const windSound = sound.find('wind');
+        if (windSound && !windSound.isPlaying) {
+            sound.play('wind');
+            soundStarted = true;
+        }
+    } catch (err) {
+        console.log('Sound start:', err.message);
+    }
+};
+
+setTimeout(tryStartSound, 100);
+
+window.addEventListener('mousemove', tryStartSound, { once: true });
+window.addEventListener('keydown', tryStartSound, { once: true });
+window.addEventListener('touchstart', tryStartSound, { once: true });
+window.addEventListener('click', tryStartSound, { once: true });
 
 const gameState = {
     isPlaying: true,
@@ -147,6 +196,11 @@ function showGameOver(won) {
 }
 function popBalloon() {
     gameState.isPlaying = false;
+    try {
+        sound.play('pop', { sprite: 'short' });
+    } catch (err) {
+        console.log('Pop sound error:', err.message);
+    }
     balloon.clear();
     balloon.poly([
         { x: 0, y: -30 },
